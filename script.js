@@ -17,10 +17,9 @@ inputbox.addEventListener("click", function() {
     let noTextAreas = document.getElementsByClassName("textarea").length;
     if (noTextAreas == 0) {
         let html = "";
-        element.innerHTML = `<textarea class= "textarea form-control" id="textarea" rows="3" maxlength= "130">${html}</textarea>`;
+        element.innerHTML = `<textarea class= "textarea form-control" id="textarea" rows="3" maxlength= "900">${html}</textarea>`;
     }
 })
-
 
 
 //note count
@@ -31,11 +30,15 @@ number.innerText = ncount;
 
 
 addbtn.addEventListener("click", function(e) {
-    showNotes();
+    let noTextAreas = document.getElementById("textarea").value.length;
+    if (noTextAreas == 0) {
+        alert("Empty");
+    } else {
+        showNotes();
+        ncount += 1;
+        number.innerText = ncount;
+    }
     document.getElementById("textarea").value = '';
-    ncount += 1;
-    number.innerText = ncount;
-
 })
 
 function showNotes() {
@@ -43,15 +46,12 @@ function showNotes() {
     let prntarea = document.querySelector(".printarea");
     let printer = document.createElement("div");
     printer.setAttribute("class", "printer");
+    // printer.setAttribute("class", ");
+    let delbtn = document.createElement("button");
+    delbtn.setAttribute("class", "delete");
+    delbtn.setAttribute("name", "delete");
+    delbtn.innerHTML = "DELETE";
     printer.innerHTML = "Note #" + ncount + "<br>" + texts;
     prntarea.appendChild(printer);
-
+    printer.appendChild(delbtn);
 }
-
-
-
-// number.innerText = ncount;
-// document.querySelector(".note_save").innerText = texts;
-// document.querySelector(".noteno").innerText = (ncount - 1);
-// document.querySelector(".printer").style.display = "flex";
-// // localStorage.setItem("NoteNumber", ncount);
